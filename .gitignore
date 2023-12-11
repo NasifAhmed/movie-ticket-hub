@@ -1,0 +1,6 @@
+movie-ticket-client/node_modules
+movie-ticket-server/node_modules
+movie-ticket-server/.env
+movie-ticket-client/.env
+movie-ticket-client/dist
+
