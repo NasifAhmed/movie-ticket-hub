@@ -1,12 +1,12 @@
 // import { useAxios } from "@/hooks/useAxios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useMutation, useQueryClient } from "react-query";
 import { useContext, useEffect, useState } from "react";
-import useAxios from "../Hooks/useAxios";
-import { UserContext } from "../providers/UserProvider";
-import { AuthContext } from "../providers/AuthProvider";
-import { Show, Ticket } from "../types";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
+import useAxios from "../Hooks/useAxios";
+import { AuthContext } from "../providers/AuthProvider";
+import { UserContext } from "../providers/UserProvider";
+import { Show, Ticket } from "../types";
 
 function CheckoutForm({ showData }: { showData: Show }) {
     const stripe = useStripe();
@@ -56,6 +56,22 @@ function CheckoutForm({ showData }: { showData: Show }) {
         },
     });
 
+    const updateDB = async () => {
+        if (showData._id) {
+            await buyTicket
+                .mutateAsync({
+                    show: showData._id,
+                    user: userFromDB?._id as string,
+                })
+                .then(() => {
+                    showMutation.mutate({
+                        ...showData,
+                        seat: showData.seat - 1,
+                    });
+                });
+        }
+    };
+
     const submitHandler = async (e: any) => {
         e.preventDefault();
         toast.loading("Processing payment .....");
@@ -100,16 +116,7 @@ function CheckoutForm({ showData }: { showData: Show }) {
             console.log("payment intent", paymentIntent);
             if (paymentIntent.status === "succeeded") {
                 console.log("Transaxtion id");
-                if (showData._id) {
-                    buyTicket.mutate({
-                        show: showData._id,
-                        user: userFromDB?._id as string,
-                    });
-                }
-                showMutation.mutate({
-                    ...showData,
-                    seat: showData.seat - 1,
-                });
+                updateDB();
             }
         }
         const modalElement = document.getElementById("modal") as any;

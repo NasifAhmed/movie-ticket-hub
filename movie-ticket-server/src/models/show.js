@@ -5,6 +5,7 @@ const showScheme = mongoose.Schema({
     date: { type: String, required: true },
     seat: { type: Number, required: true },
     price: { type: Number, required: true },
+    review: [{ type: String }],
 });
 
 const Show = mongoose.model("Show", showScheme);

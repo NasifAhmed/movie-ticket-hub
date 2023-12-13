@@ -45,9 +45,7 @@ export default function Footer() {
                 </div>
             </nav>
             <aside>
-                <p>
-                    Copyright © 2023 - All right reserved by ACME Industries Ltd
-                </p>
+                <p>Copyright © 2023 - CSE470 Group 10 - Movie Ticket Hub</p>
             </aside>
         </footer>
     );

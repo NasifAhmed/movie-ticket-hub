@@ -1,9 +1,11 @@
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import useAxiosTMDB from "../Hooks/useTMDB";
 import { Movie, Show } from "../types";
 
 export default function TicketRow({ showData }: { showData: Show }) {
     const { instance: axios, imagePrefix } = useAxiosTMDB();
+    const navigate = useNavigate();
     const movieResponse = useQuery({
         queryKey: ["movies", showData._id],
         queryFn: async () => {
@@ -47,8 +49,23 @@ export default function TicketRow({ showData }: { showData: Show }) {
                         <td>{movieResponse.data.release_date}</td>
                         <td>{showData.date}</td>
                         <th>
-                            <button className="btn btn-ghost btn-xs">
-                                details
+                            <button
+                                onClick={() => {
+                                    navigate(`/review/${showData._id}`);
+                                }}
+                                className="btn btn-ghost btn-xs"
+                            >
+                                Review
+                            </button>
+                        </th>
+                        <th>
+                            <button
+                                onClick={() => {
+                                    navigate(`/movie-details/${showData.id}`);
+                                }}
+                                className="btn btn-ghost btn-xs"
+                            >
+                                Details
                             </button>
                         </th>
                     </tr>

@@ -6,6 +6,7 @@ async function insertShow(data) {
         date: data.date,
         seat: data.seat,
         price: data.price,
+        review: [...data.review],
     };
 
     if (data._id) {

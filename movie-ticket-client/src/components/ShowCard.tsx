@@ -1,13 +1,16 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useContext, useState } from "react";
-import { useQuery } from "react-query";
+import toast from "react-hot-toast";
+import { useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+import useAxios from "../Hooks/useAxios";
 import useAxiosTMDB from "../Hooks/useTMDB";
 import CheckoutForm from "../components/CheckoutForm";
+import { AuthContext } from "../providers/AuthProvider";
 import { UserContext } from "../providers/UserProvider";
 import { Movie, Show } from "../types";
 import Spinner from "./Spinner";
-import { AuthContext } from "../providers/AuthProvider";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_PK);
 
@@ -15,6 +18,7 @@ export default function ShowCard({ showData }: { showData: Show }) {
     const { userFromDB } = useContext(UserContext);
     const { user } = useContext(AuthContext);
     const [data, setData] = useState<Movie>();
+    const navigate = useNavigate();
     const { instance: axios, imagePrefix } = useAxiosTMDB();
     // useEffect(() => {
     //     axios
@@ -46,6 +50,27 @@ export default function ShowCard({ showData }: { showData: Show }) {
         refetchOnWindowFocus: false,
     });
 
+    const axiosNormal = useAxios();
+
+    const queryClient = useQueryClient();
+    const deleteHandler = async () => {
+        await axiosNormal
+            .delete<Movie>(`/show?_id=${showData._id}`)
+            .then((res) => {
+                console.log(`Show post response : `, res);
+                queryClient.invalidateQueries({
+                    queryKey: [["shows", showData._id]],
+                });
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+            .then(() => {
+                toast.success("Successfull deleted !");
+                window.location.reload();
+            });
+    };
+
     return (
         <>
             {movieResponse.isLoading && (
@@ -73,22 +98,47 @@ export default function ShowCard({ showData }: { showData: Show }) {
                             <span className="font-semibold">Price : </span>$
                             {showData.price}
                         </p>
-                        <div className="card-actions justify-end">
+                        <div className="card-actions justify-between mt-5">
                             <button
-                                onClick={() => {
-                                    const modal = document?.getElementById(
-                                        `modal${showData?._id}`
-                                    ) as HTMLDialogElement;
-
-                                    if (modal) {
-                                        modal.showModal();
-                                    }
-                                }}
+                                onClick={() =>
+                                    navigate(`/movie-details/${showData.id}`)
+                                }
                                 className="btn btn-primary"
-                                disabled={userFromDB?.role === "admin" || !user}
                             >
-                                Buy Now
+                                Details
                             </button>
+                            <button
+                                onClick={() =>
+                                    navigate(`/review-show/${showData._id}`)
+                                }
+                                className="btn btn-primary"
+                            >
+                                Reviews
+                            </button>
+                            {userFromDB?.role === "admin" ? (
+                                <button
+                                    onClick={deleteHandler}
+                                    className="btn btn-warning"
+                                >
+                                    Delete
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        const modal = document?.getElementById(
+                                            `modal${showData?._id}`
+                                        ) as HTMLDialogElement;
+
+                                        if (modal) {
+                                            modal.showModal();
+                                        }
+                                    }}
+                                    className="btn btn-secondary"
+                                    disabled={!user}
+                                >
+                                    Buy Now
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>

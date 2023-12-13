@@ -1,13 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import Home from "../pages/Home";
 import SearchMovie from "../components/SearchMovie";
+import Home from "../pages/Home";
 import Login from "../pages/Login";
+import MovieDetails from "../pages/MovieDetails";
+import MyShows from "../pages/MyShows";
 import Register from "../pages/Register";
+import ReviewShow from "../pages/ReviewShow";
+import Reviews from "../pages/Reviews";
 import Shows from "../pages/Shows";
 import Unauthorized from "../pages/Unauthorized";
 import PrivateRoute from "./PrivateRoute";
-import MyShows from "../pages/MyShows";
 
 export const router = createBrowserRouter([
     {
@@ -41,6 +44,18 @@ export const router = createBrowserRouter([
             {
                 path: "/my-shows",
                 element: <MyShows />,
+            },
+            {
+                path: "/movie-details/:id",
+                element: <MovieDetails />,
+            },
+            {
+                path: "/review/:id",
+                element: <Reviews />,
+            },
+            {
+                path: "/review-show/:id",
+                element: <ReviewShow />,
             },
         ],
     },

@@ -4,6 +4,11 @@ export type Movie = {
     overview: string;
     poster_path: string;
     release_date: string;
+    backdrop_path: string;
+    original_language: string;
+    runtime: number;
+    budget: number;
+    tagline: string;
 };
 
 export type Show = {
@@ -12,6 +17,7 @@ export type Show = {
     date: string;
     seat: number;
     price: number;
+    review?: string[];
 };
 
 export type Ticket = {

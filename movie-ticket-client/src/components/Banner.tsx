@@ -9,6 +9,7 @@ import "../assets/styles.css";
 
 // import required modules
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { Autoplay, Pagination } from "swiper/modules";
 import useAxios from "../Hooks/useAxios";
 import { Show } from "../types";
@@ -16,6 +17,7 @@ import BannerSlider from "./BannerSlider";
 
 export default function Banner() {
     const axios = useAxios();
+    const navigate = useNavigate();
 
     const showResponse = useQuery({
         queryKey: ["show"],
@@ -41,7 +43,7 @@ export default function Banner() {
                     }}
                     loop={true}
                     autoplay={{
-                        delay: 1000,
+                        delay: 1500,
                         disableOnInteraction: false,
                     }}
                     modules={[Pagination, Autoplay]}
@@ -51,7 +53,14 @@ export default function Banner() {
                         {showResponse.data &&
                             showResponse.data.map((show) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide
+                                        className="cursor-pointer"
+                                        onClick={() =>
+                                            navigate(
+                                                `/movie-details/${show.id}`
+                                            )
+                                        }
+                                    >
                                         <BannerSlider showData={show} />
                                     </SwiperSlide>
                                 );
