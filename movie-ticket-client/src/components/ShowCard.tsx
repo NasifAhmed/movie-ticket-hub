@@ -153,8 +153,8 @@ export default function ShowCard({ showData }: { showData: Show }) {
                         Enter payment details below and confirm your ticket
                     </p>
                     <p>
-                        <span className="font-semibold">Price : </span>$
-                        {showData.price}
+                        <span className="font-semibold">Price : </span>
+                        {showData.price} Taka
                     </p>
                     <br></br>
                     <div>

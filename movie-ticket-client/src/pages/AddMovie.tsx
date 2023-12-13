@@ -16,6 +16,7 @@ export default function AddMovie({ movie }: { movie: Movie }) {
             date: date as string,
             seat: parseInt(seat as string) as number,
             price: parseInt(price as string) as number,
+            review: [],
         };
 
         await axios
