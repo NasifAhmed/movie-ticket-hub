@@ -1,6 +1,6 @@
 # Movie Ticket Hub
 
-## Live Site : [Here]([https://medi-camp.web.app/](https://movie-ticket-hub.web.app/))
+## Live Site : [Here](https://movie-ticket-hub.web.app/)
 
 ## Used tech
 
