@@ -11,6 +11,18 @@ async function queryTicket(filter) {
         }
         delete filter.sort;
     }
+
+    if (filter.user) {
+        try {
+            const cursor = await Ticket.sort(sortField)
+                .populate("show")
+                .populate("user")
+                .find({ user: { _id: filter.user } });
+            return cursor;
+        } catch (error) {
+            console.log(error);
+        }
+    }
     if (filter.count) {
         delete filter.count;
         try {

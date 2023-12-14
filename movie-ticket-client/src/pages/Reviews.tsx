@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
@@ -38,6 +39,7 @@ export default function Reviews() {
                 ...showData,
                 review: [...(showData.review as any), review as string],
             });
+            toast.success("Added review !");
         }
     };
     return (

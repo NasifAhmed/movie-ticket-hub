@@ -1,6 +1,6 @@
 import { ReactNode, useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 import { UserContext } from "../providers/UserProvider";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
@@ -25,7 +25,10 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
     if (!user) {
         return <Navigate state={location.pathname} to="/login"></Navigate>;
     } else if (userFromDB && userFromDB.role === "user") {
-        if (location.pathname === "/add-show") {
+        if (
+            location.pathname === "/add-show" ||
+            location.pathname === "/manage-users"
+        ) {
             return <Navigate to="/unauthorized" />;
         }
     }

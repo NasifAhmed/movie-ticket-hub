@@ -1,12 +1,12 @@
-import { Outlet } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
+import { Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 
 function App() {
     return (
         <>
-            <div className="flex flex-col max-w-screen-lg mx-auto min-h-screen">
+            <div className="flex flex-col max-w-screen-xl mx-auto min-h-screen">
                 <NavBar />
                 <div className="flex-grow h-full w-full">
                     <Outlet />

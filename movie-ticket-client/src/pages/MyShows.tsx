@@ -1,16 +1,19 @@
+import { useContext } from "react";
 import { useQuery } from "react-query";
 import useAxios from "../Hooks/useAxios";
-import { Show, Ticket } from "../types";
-import TicketRow from "../components/TicketRow";
 import Spinner from "../components/Spinner";
+import TicketRow from "../components/TicketRow";
+import { UserContext } from "../providers/UserProvider";
+import { Show, Ticket } from "../types";
 
 export default function MyShows() {
     const axios = useAxios();
+    const { userFromDB } = useContext(UserContext);
     const ticketResponse = useQuery({
         queryKey: ["show"],
         queryFn: async (): Promise<Ticket[] | null> => {
             try {
-                const res = await axios.get("/ticket");
+                const res = await axios.get(`/ticket?user=${userFromDB?._id}`);
                 return res.data;
             } catch (error) {
                 console.log(`Error while fetching show data : ${error}`);

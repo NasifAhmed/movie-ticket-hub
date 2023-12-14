@@ -47,7 +47,7 @@ export default function Banner() {
                         disableOnInteraction: false,
                     }}
                     modules={[Pagination, Autoplay]}
-                    className="mySwiper max-h-[50vh]"
+                    className="mySwiper max-h-[80vh]"
                 >
                     <>
                         {showResponse.data &&

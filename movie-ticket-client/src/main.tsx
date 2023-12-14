@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./router/Router";
-import AuthProvider from "./providers/AuthProvider";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RouterProvider } from "react-router-dom";
+import "./index.css";
+import AuthProvider from "./providers/AuthProvider";
 import UserProvider from "./providers/UserProvider";
+import { router } from "./router/Router";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -16,13 +16,13 @@ const queryClient = new QueryClient({
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-            <UserProvider>
-                <React.StrictMode>
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+                <UserProvider>
                     <RouterProvider router={router} />
-                </React.StrictMode>
-            </UserProvider>
-        </AuthProvider>
-    </QueryClientProvider>
+                </UserProvider>
+            </AuthProvider>
+        </QueryClientProvider>
+    </React.StrictMode>
 );

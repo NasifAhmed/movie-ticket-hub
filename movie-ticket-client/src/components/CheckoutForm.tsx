@@ -63,11 +63,15 @@ function CheckoutForm({ showData }: { showData: Show }) {
                     show: showData._id,
                     user: userFromDB?._id as string,
                 })
-                .then(() => {
-                    showMutation.mutate({
-                        ...showData,
-                        seat: showData.seat - 1,
-                    });
+                .then(async () => {
+                    await showMutation
+                        .mutateAsync({
+                            ...showData,
+                            seat: showData.seat - 1,
+                        })
+                        .then(() => {
+                            window.location.reload();
+                        });
                 });
         }
     };
@@ -129,7 +133,6 @@ function CheckoutForm({ showData }: { showData: Show }) {
             console.error("Element with id 'modal' not found");
         }
         toast.success("Successfull payment !");
-        window.location.reload();
     };
 
     return (

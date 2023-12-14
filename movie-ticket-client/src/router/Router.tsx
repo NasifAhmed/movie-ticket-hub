@@ -3,6 +3,7 @@ import App from "../App";
 import SearchMovie from "../components/SearchMovie";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import ManageUsers from "../pages/ManageUsers";
 import MovieDetails from "../pages/MovieDetails";
 import MyShows from "../pages/MyShows";
 import Register from "../pages/Register";
@@ -43,7 +44,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/my-shows",
-                element: <MyShows />,
+                element: (
+                    <PrivateRoute>
+                        <MyShows />
+                    </PrivateRoute>
+                ),
             },
             {
                 path: "/movie-details/:id",
@@ -56,6 +61,14 @@ export const router = createBrowserRouter([
             {
                 path: "/review-show/:id",
                 element: <ReviewShow />,
+            },
+            {
+                path: "/manage-users",
+                element: (
+                    <PrivateRoute>
+                        <ManageUsers />
+                    </PrivateRoute>
+                ),
             },
         ],
     },
