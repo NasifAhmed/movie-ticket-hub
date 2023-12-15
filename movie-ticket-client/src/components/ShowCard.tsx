@@ -59,7 +59,7 @@ export default function ShowCard({ showData }: { showData: Show }) {
             .then((res) => {
                 console.log(`Show post response : `, res);
                 queryClient.invalidateQueries({
-                    queryKey: [["shows", showData._id]],
+                    queryKey: ["shows", showData._id],
                 });
             })
             .catch((e) => {

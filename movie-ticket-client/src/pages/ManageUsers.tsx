@@ -7,7 +7,7 @@ import { User } from "../types";
 export default function ManageUsers() {
     const axios = useAxios();
     const userResponse = useQuery({
-        queryKey: ["show"],
+        queryKey: ["users", "manage"],
         queryFn: async (): Promise<User[] | null> => {
             try {
                 const res = await axios.get(`/user`);
