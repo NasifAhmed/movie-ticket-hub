@@ -18,10 +18,10 @@ export default function Home() {
                     <button className="btn btn-primary">Get Started</button>
                 </div>
             </div> */}
-            <h1 className="text-center font-bold text-4xl pt-10 mb-10">
+            <h1 className="text-center font-bold text-xl md:text-2xl lg:text-4xl pt-10 mb-5 md:mb-10">
                 Buy tickets for movies you want to watch
             </h1>
-            <h2 className="text-center font-bold text-2xl pt-10 mb-10">
+            <h2 className="text-center font-bold text-lg md:text-2xl pt-10 mb-5 md:mb-10">
                 Available Shows
             </h2>
             <div className="hero">

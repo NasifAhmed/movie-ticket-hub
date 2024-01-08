@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
@@ -43,29 +44,34 @@ export default function Reviews() {
         }
     };
     return (
-        <div className="flex justify-center items-center">
-            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <form className="card-body" onSubmit={submitHandler}>
-                    <div className="form-control">
-                        <label className="label">
-                            <span className="label-text font-bold text-xl">
-                                Review
-                            </span>
-                        </label>
-                        <textarea
-                            name="review"
-                            placeholder="review"
-                            className="input input-bordered p-5 h-40 w-full"
-                            required
-                        />
-                    </div>
-                    <div className="form-control mt-6">
-                        <button type="submit" className="btn btn-primary">
-                            Submit
-                        </button>
-                    </div>
-                </form>
+        <>
+            <Helmet>
+                <title>Reviews | Movie Ticket Hub</title>
+            </Helmet>
+            <div className="flex justify-center items-center">
+                <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <form className="card-body" onSubmit={submitHandler}>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-bold text-xl">
+                                    Review
+                                </span>
+                            </label>
+                            <textarea
+                                name="review"
+                                placeholder="review"
+                                className="input input-bordered p-5 h-40 w-full"
+                                required
+                            />
+                        </div>
+                        <div className="form-control mt-6">
+                            <button type="submit" className="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 }

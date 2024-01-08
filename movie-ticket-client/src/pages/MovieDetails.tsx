@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosTMDB from "../Hooks/useTMDB";
@@ -23,46 +24,54 @@ export default function MovieDetails() {
         },
         enabled: !!id,
     });
+
     return (
-        <div className="flex flex-col justify-center items-center w-full gap-5">
-            <h1 className="font-bold text-5xl">{movieResponse.data?.title}</h1>
-            <h2 className="font-medium text-xl">
-                {movieResponse.data?.tagline}
-            </h2>
-            <img
-                src={`${imagePrefix}${movieResponse.data?.poster_path}`}
-                alt=""
-                className="max-h-96"
-            />
-            {/* <img
+        <>
+            <Helmet>
+                <title>Details | Movie Ticket Hub</title>
+            </Helmet>
+            <div className="flex flex-col justify-center items-center w-full gap-5">
+                <h1 className="font-bold text-5xl">
+                    {movieResponse.data?.title}
+                </h1>
+                <h2 className="font-medium text-xl">
+                    {movieResponse.data?.tagline}
+                </h2>
+                <img
+                    src={`${imagePrefix}${movieResponse.data?.poster_path}`}
+                    alt=""
+                    className="max-h-96"
+                />
+                {/* <img
                 src={`${imagePrefix}${movieResponse.data?.backdrop_path}`}
                 alt=""
             /> */}
-            <p className="leading-relaxed text-lg text-center max-w-2xl">
-                {movieResponse.data?.overview}
-            </p>
-            <h2>
-                <span className="text-lg font-bold">Language : </span>
-                {movieResponse.data?.original_language}
-            </h2>
-            <h2>
-                <span className="text-lg font-bold">Release Date : </span>
-                {movieResponse.data?.release_date}
-            </h2>
-            <h2>
-                <span className="text-lg font-bold">Runtime : </span>
-                {movieResponse.data?.runtime} min
-            </h2>
-            <h2>
-                <span className="text-lg font-bold">Budget : </span>$
-                {movieResponse.data?.budget}
-            </h2>
-            <button
-                className="btn btn-primary"
-                onClick={() => navigate(`/shows`)}
-            >
-                Buy Tickets
-            </button>
-        </div>
+                <p className="leading-relaxed text-lg text-center max-w-2xl">
+                    {movieResponse.data?.overview}
+                </p>
+                <h2>
+                    <span className="text-lg font-bold">Language : </span>
+                    {movieResponse.data?.original_language}
+                </h2>
+                <h2>
+                    <span className="text-lg font-bold">Release Date : </span>
+                    {movieResponse.data?.release_date}
+                </h2>
+                <h2>
+                    <span className="text-lg font-bold">Runtime : </span>
+                    {movieResponse.data?.runtime} min
+                </h2>
+                <h2>
+                    <span className="text-lg font-bold">Budget : </span>$
+                    {movieResponse.data?.budget}
+                </h2>
+                <button
+                    className="btn btn-primary"
+                    onClick={() => navigate(`/shows`)}
+                >
+                    Buy Tickets
+                </button>
+            </div>
+        </>
     );
 }

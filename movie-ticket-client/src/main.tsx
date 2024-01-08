@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -10,7 +11,7 @@ import { router } from "./router/Router";
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            refetchOnWindowFocus: false,
+            // refetchOnWindowFocus: false,
         },
     },
 });
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
                 <UserProvider>
-                    <RouterProvider router={router} />
+                    <HelmetProvider>
+                        <RouterProvider router={router} />
+                    </HelmetProvider>
                 </UserProvider>
             </AuthProvider>
         </QueryClientProvider>

@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import useAxios from "../Hooks/useAxios";
 import Spinner from "../components/Spinner";
@@ -24,6 +25,9 @@ export default function MyShows() {
 
     return (
         <>
+            <Helmet>
+                <title>My Shows | Movie Ticket Hub</title>
+            </Helmet>
             {ticketResponse.isLoading ? (
                 <Spinner condition={ticketResponse.isLoading} />
             ) : (

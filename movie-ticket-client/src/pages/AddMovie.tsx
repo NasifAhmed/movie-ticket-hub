@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import useAxios from "../Hooks/useAxios";
 import { Movie, Show } from "../types";
@@ -34,56 +35,64 @@ export default function AddMovie({ movie }: { movie: Movie }) {
     }
 
     return (
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form className="card-body" onSubmit={submitHandler}>
-                <div>
-                    <label className="label">
-                        <span className="label-text font-bold">Movie : </span>
-                        <span className="label-text">{movie.title}</span>
-                    </label>
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Schedule</span>
-                    </label>
-                    <input
-                        type="datetime-local"
-                        name="date"
-                        placeholder="Schedule"
-                        className="input input-bordered"
-                        required
-                    />
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Number of seats</span>
-                    </label>
-                    <input
-                        type="number"
-                        name="seat"
-                        placeholder="Number of seats"
-                        className="input input-bordered"
-                        required
-                    />
-                </div>
-                <div className="form-control">
-                    <label className="label">
-                        <span className="label-text">Price($)</span>
-                    </label>
-                    <input
-                        type="number"
-                        name="price"
-                        placeholder="Price for each ticket"
-                        className="input input-bordered"
-                        required
-                    />
-                </div>
-                <div className="form-control mt-6">
-                    <button type="submit" className="btn btn-primary">
-                        ADD
-                    </button>
-                </div>
-            </form>
-        </div>
+        <>
+            <Helmet>
+                <title>Add Movie | Movie Ticket Hub</title>
+            </Helmet>
+
+            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <form className="card-body" onSubmit={submitHandler}>
+                    <div>
+                        <label className="label">
+                            <span className="label-text font-bold">
+                                Movie :{" "}
+                            </span>
+                            <span className="label-text">{movie.title}</span>
+                        </label>
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Schedule</span>
+                        </label>
+                        <input
+                            type="datetime-local"
+                            name="date"
+                            placeholder="Schedule"
+                            className="input input-bordered"
+                            required
+                        />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Number of seats</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="seat"
+                            placeholder="Number of seats"
+                            className="input input-bordered"
+                            required
+                        />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Price($)</span>
+                        </label>
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder="Price for each ticket"
+                            className="input input-bordered"
+                            required
+                        />
+                    </div>
+                    <div className="form-control mt-6">
+                        <button type="submit" className="btn btn-primary">
+                            ADD
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }

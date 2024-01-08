@@ -47,7 +47,6 @@ export default function ShowCard({ showData }: { showData: Show }) {
                     console.log(error);
                 });
         },
-        refetchOnWindowFocus: false,
     });
 
     const axiosNormal = useAxios();
@@ -77,7 +76,7 @@ export default function ShowCard({ showData }: { showData: Show }) {
                 <Spinner condition={movieResponse.isLoading} />
             )}
             {data && (
-                <div className="card card-compact w-96 bg-base-100 shadow-xl">
+                <div className="card card-compact max-w-[24rem] bg-base-100 shadow-xl">
                     <figure>
                         <img
                             src={`${imagePrefix}${data.poster_path}`}

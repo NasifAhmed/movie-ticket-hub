@@ -60,9 +60,63 @@ export default function NavBar() {
                                 Available Shows
                             </NavLink>
                         </li>
+                        {userFromDB?.role === "admin" && (
+                            <>
+                                <li>
+                                    <NavLink
+                                        to="/add-show"
+                                        className={"navbar transition-colors"}
+                                    >
+                                        Add Show
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/manage-users"
+                                        className={"navbar transition-colors"}
+                                    >
+                                        Manage Users
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
+                        {userFromDB?.role === "user" && (
+                            <li>
+                                <NavLink
+                                    to="/my-shows"
+                                    className={"navbar transition-colors"}
+                                >
+                                    My Shows
+                                </NavLink>
+                            </li>
+                        )}
+                        {user ? (
+                            <>
+                                <li>
+                                    <a onClick={handlelogout} className="btn">
+                                        Log Out
+                                    </a>
+                                </li>
+                            </>
+                        ) : (
+                            <>
+                                <li>
+                                    <a href="/login" className="btn">
+                                        Log In
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/register" className="btn">
+                                        Register
+                                    </a>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Movie Ticket Hub</a>
+                <a className="btn btn-ghost text-md md:text-xl ">
+                    Movie Ticket Hub
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -114,19 +168,22 @@ export default function NavBar() {
             <div className="navbar-end">
                 {user ? (
                     <>
-                        <div className="mr-5">
+                        <div className="mr-5 hidden md:flex">
                             <h1>{user.email}</h1>
                         </div>
-                        <a onClick={handlelogout} className="btn">
+                        <a
+                            onClick={handlelogout}
+                            className="btn hidden md:flex"
+                        >
                             Log Out
                         </a>
                     </>
                 ) : (
                     <>
-                        <a href="/login" className="btn">
+                        <a href="/login" className="btn hidden md:flex">
                             Log In
                         </a>
-                        <a href="/register" className="btn">
+                        <a href="/register" className="btn hidden md:flex">
                             Register
                         </a>
                     </>
@@ -136,7 +193,7 @@ export default function NavBar() {
                     <input
                         type="checkbox"
                         className="theme-controller"
-                        value="coffee"
+                        value="dracula"
                     />
 
                     {/* sun icon */}
